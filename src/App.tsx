@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
+
+import Header from './components/header/Header';
+
 import './App.css';
+import CreateNoteForm from './components/createNoteForm/CreateNoteForm';
+import { useSelector } from 'react-redux';
+import { RootState } from './redux/store';
+import NoteList from './components/noteList/NoteList';
+import Footer from './components/footer/Footer';
 
 function App() {
+  const notes = useSelector((state: RootState) => state.notes.notes)
+
+  useEffect(() => {
+    console.log(notes)
+  }, [notes])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <CreateNoteForm />
+      <NoteList />
+      <Footer />
     </div>
   );
 }
